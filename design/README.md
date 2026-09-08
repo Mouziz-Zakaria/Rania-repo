@@ -16,8 +16,6 @@ en français.
 | `Favoris.dc.html` | 6 · Favoris — contenus enregistrés |
 | `HorsConnexion.dc.html` | 7 · Hors connexion — contenus en cache, « Continuer ma visite » |
 | `Profil.dc.html` | 8 · Profil — compte, découvertes, favoris, préférences |
-| `Architecture.dc.html` | Schéma d'architecture technique |
-| `Flow.dc.html` | Parcours utilisateur (Accueil → QR → Exposition → IA → Favoris → Visite) |
 | `canvas.json` | Disposition des plans de travail sur le canevas |
 | `exploradome-mockups.html` | Canevas assemblé (page autonome, ouvrable dans un navigateur) |
 
@@ -32,11 +30,15 @@ en français.
 - **Visuels d'exposition** — compositions vectorielles intégrées
   (aucune ressource externe), à remplacer par les photographies du musée.
 
-## Architecture représentée
+## Planches hors canevas
 
-React Native / Expo → Node.js / Express → PostgreSQL + Neo4j ·
-Node.js / Express → OpenAI API · Clerk → authentification ·
-Redis / Upstash → cache · QR code → données d'exposition.
+`Architecture.dc.html` (schéma technique : React Native / Expo →
+Node.js / Express → PostgreSQL + Neo4j, OpenAI API, Clerk, Redis /
+Upstash, QR code → données d'exposition) et `Flow.dc.html` (parcours
+Accueil → QR → Exposition → IA → Favoris → Visite) restent dans le
+dépôt mais ne figurent plus sur le canevas, qui ne présente que les
+huit maquettes. Les rajouter revient à les lister dans `canvas.json`
+et à les passer à `seed-canvas.mjs`.
 
 ## Modifier les maquettes
 
