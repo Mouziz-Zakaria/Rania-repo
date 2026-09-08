@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; width: 1120px; height: 620px; overflow: hidden;
+           font-family: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
+           background: #FBFAF7; color: #101A2B;
+           -webkit-font-smoothing: antialiased; }
+    a { color: #B5653C; text-decoration: none; }
+    a:hover { color: #8F4B2A; }
+  </style>
+</helmet>
+
+<div style="width: 1120px; height: 620px; background: #FBFAF7; position: relative; overflow: hidden;">
+
+  <div style="position: absolute; left: 48px; top: 30px; font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-size: 28px; line-height: 32px; color: #101A2B;">Architecture technique</div>
+  <div style="position: absolute; left: 48px; top: 66px; font-size: 13px; font-weight: 600; color: #8A867E;">Exploradôme · application mobile et services</div>
+  <div style="position: absolute; left: 48px; top: 96px; width: 1024px; height: 1px; background: #EBE6DD;"></div>
+
+  <div style="position: absolute; left: 48px; top: 106px; font-size: 10px; font-weight: 800; letter-spacing: 0.8px; color: #9A968E; text-transform: uppercase;">Client</div>
+  <div style="position: absolute; left: 436px; top: 106px; font-size: 10px; font-weight: 800; letter-spacing: 0.8px; color: #9A968E; text-transform: uppercase;">Services</div>
+  <div style="position: absolute; left: 824px; top: 106px; font-size: 10px; font-weight: 800; letter-spacing: 0.8px; color: #9A968E; text-transform: uppercase;">Données</div>
+
+  <svg width="1120" height="620" viewBox="0 0 1120 620" fill="none" style="position: absolute; left: 0; top: 0;">
+    <defs>
+      <marker id="ah" viewBox="0 0 10 10" refX="0" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" fill="#B4ACA0" />
+      </marker>
+    </defs>
+    <g stroke="#C6BEB2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)">
+      <path d="M172 242 V178 H429" />
+      <path d="M560 230 V245" />
+      <path d="M296 292 H429" />
+      <path d="M172 452 V381" />
+      <path d="M684 282 H754 V180 H817" />
+      <path d="M684 308 H817" />
+      <path d="M684 334 H754 V436 H817" />
+      <path d="M560 370 V445" />
+    </g>
+  </svg>
+
+  <div style="position: absolute; left: 48px; top: 242px; width: 248px; height: 132px; border-radius: 18px; background: #101A2B; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 32px; height: 32px; border-radius: 10px; background: #22314A; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#E8C9A8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4" /><path d="M10.6 18.8h2.8" /></svg>
+      </div>
+      <div style="font-size: 15px; font-weight: 800; color: #FBFAF7; letter-spacing: -0.1px;">Application mobile</div>
+    </div>
+    <div style="font-size: 12.5px; font-weight: 700; color: #A9B4C4; line-height: 17px;">React Native · Expo — iOS &amp; Android</div>
+    <div style="font-size: 11px; font-weight: 600; color: #74839A;">Cache local SQLite · mode hors connexion</div>
+  </div>
+
+  <div style="position: absolute; left: 48px; top: 452px; width: 248px; height: 104px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E6E1D8; padding: 15px; display: flex; flex-direction: column; gap: 7px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 32px; height: 32px; border-radius: 10px; background: #F4F1EB; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4A4842" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V5.6A1.6 1.6 0 0 1 5.6 4h2.9M15.5 4h2.9A1.6 1.6 0 0 1 20 5.6v2.9M20 15.5v2.9a1.6 1.6 0 0 1-1.6 1.6h-2.9M8.5 20H5.6A1.6 1.6 0 0 1 4 18.4v-2.9M7.6 12h8.8" /></svg>
+      </div>
+      <div style="font-size: 15px; font-weight: 800; color: #101A2B; letter-spacing: -0.1px;">QR code</div>
+    </div>
+    <div style="font-size: 12.5px; font-weight: 600; color: #6C6A66; line-height: 17px;">Cartel de salle → identifiant d'exposition</div>
+  </div>
+
+  <div style="position: absolute; left: 436px; top: 126px; width: 248px; height: 104px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E6E1D8; padding: 15px; display: flex; flex-direction: column; gap: 7px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 32px; height: 32px; border-radius: 10px; background: #F1F5F5; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2F6F7E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10.5" rx="2.4" /><path d="M8 10.5V7.6a4 4 0 0 1 8 0v2.9" /></svg>
+      </div>
+      <div style="font-size: 15px; font-weight: 800; color: #101A2B; letter-spacing: -0.1px;">Clerk</div>
+    </div>
+    <div style="font-size: 12.5px; font-weight: 600; color: #6C6A66; line-height: 17px;">Authentification · comptes visiteurs</div>
+  </div>
+
+  <div style="position: absolute; left: 436px; top: 252px; width: 248px; height: 118px; border-radius: 18px; background: #FFFFFF; border: 1.5px solid #B5653C; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 32px; height: 32px; border-radius: 10px; background: #F6EBE4; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B5653C" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 7 5 12l4.5 5M14.5 7 19 12l-4.5 5" /></svg>
+      </div>
+      <div style="font-size: 15px; font-weight: 800; color: #101A2B; letter-spacing: -0.1px;">API applicative</div>
+    </div>
+    <div style="font-size: 12.5px; font-weight: 700; color: #55524C; line-height: 17px;">Node.js · Express — REST /api/v1</div>
+    <div style="font-size: 11px; font-weight: 600; color: #9A968E; line-height: 16px;">Contenus, favoris, progression de visite</div>
+  </div>
+
+  <div style="position: absolute; left: 436px; top: 452px; width: 248px; height: 104px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E6E1D8; padding: 15px; display: flex; flex-direction: column; gap: 7px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 32px; height: 32px; border-radius: 10px; background: #F1F5F5; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2F6F7E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2l1.9 5.1 5.1 1.9-5.1 1.9L12 17.2l-1.9-5.1L5 10.2l5.1-1.9z" /></svg>
+      </div>
+      <div style="font-size: 15px; font-weight: 800; color: #101A2B; letter-spacing: -0.1px;">OpenAI API</div>
+    </div>
+    <div style="font-size: 12.5px; font-weight: 600; color: #6C6A66; line-height: 17px;">Assistant IA · réponses contextualisées</div>
+  </div>
+
+  <div style="position: absolute; left: 824px; top: 128px; width: 248px; height: 104px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E6E1D8; padding: 15px; display: flex; flex-direction: column; gap: 7px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 32px; height: 32px; border-radius: 10px; background: #F4F1EB; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4A4842" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7.4" ry="3" /><path d="M4.6 6v12c0 1.7 3.3 3 7.4 3s7.4-1.3 7.4-3V6" /><path d="M4.6 12c0 1.7 3.3 3 7.4 3s7.4-1.3 7.4-3" /></svg>
+      </div>
+      <div style="font-size: 15px; font-weight: 800; color: #101A2B; letter-spacing: -0.1px;">PostgreSQL</div>
+    </div>
+    <div style="font-size: 12.5px; font-weight: 600; color: #6C6A66; line-height: 17px;">Expositions, comptes, favoris, visites</div>
+  </div>
+
+  <div style="position: absolute; left: 824px; top: 256px; width: 248px; height: 104px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E6E1D8; padding: 15px; display: flex; flex-direction: column; gap: 7px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 32px; height: 32px; border-radius: 10px; background: #F4F1EB; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4A4842" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6.4" r="2.6" /><circle cx="18" cy="9.4" r="2.6" /><circle cx="9.4" cy="18" r="2.6" /><path d="M8.3 7.3l7.2 1.6M7 9l1.6 6.5M16.6 11.5 11.3 16.4" /></svg>
+      </div>
+      <div style="font-size: 15px; font-weight: 800; color: #101A2B; letter-spacing: -0.1px;">Neo4j</div>
+    </div>
+    <div style="font-size: 12.5px; font-weight: 600; color: #6C6A66; line-height: 17px;">Graphe des parcours et recommandations</div>
+  </div>
+
+  <div style="position: absolute; left: 824px; top: 384px; width: 248px; height: 104px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E6E1D8; padding: 15px; display: flex; flex-direction: column; gap: 7px;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 32px; height: 32px; border-radius: 10px; background: #F6EBE4; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B5653C" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13.2 2.8 5.6 13.4h5.4l-.6 7.8 7.6-10.6h-5.4z" /></svg>
+      </div>
+      <div style="font-size: 15px; font-weight: 800; color: #101A2B; letter-spacing: -0.1px;">Redis · Upstash</div>
+    </div>
+    <div style="font-size: 12.5px; font-weight: 600; color: #6C6A66; line-height: 17px;">Cache des contenus et des réponses IA</div>
+  </div>
+
+  <div style="position: absolute; left: 366px; top: 264px; transform: translate(-50%, -50%); padding: 3px 8px; background: #FBFAF7; text-align: center;">
+    <div style="font-size: 11px; font-weight: 800; color: #55524C; letter-spacing: 0.1px;">REST · JSON</div>
+    <div style="font-size: 10.5px; font-weight: 600; color: #9A968E; margin-top: 2px;">GET /expositions/:id</div>
+  </div>
+  <div style="position: absolute; left: 300px; top: 178px; transform: translate(-50%, -50%); padding: 3px 8px; background: #FBFAF7; font-size: 11px; font-weight: 700; color: #6C6A66; white-space: nowrap;">Connexion · session</div>
+  <div style="position: absolute; left: 644px; top: 238px; transform: translate(-50%, -50%); padding: 3px 8px; background: #FBFAF7; font-size: 11px; font-weight: 700; color: #6C6A66; white-space: nowrap;">Vérification du jeton</div>
+  <div style="position: absolute; left: 214px; top: 414px; transform: translate(-50%, -50%); padding: 3px 8px; background: #FBFAF7; font-size: 11px; font-weight: 700; color: #6C6A66; white-space: nowrap;">Scan</div>
+  <div style="position: absolute; left: 789px; top: 166px; transform: translate(-50%, -50%); padding: 3px 8px; background: #FBFAF7; font-size: 11px; font-weight: 700; color: #6C6A66; white-space: nowrap;">SQL</div>
+  <div style="position: absolute; left: 754px; top: 294px; transform: translate(-50%, -50%); padding: 3px 8px; background: #FBFAF7; font-size: 11px; font-weight: 700; color: #6C6A66; white-space: nowrap;">Cypher</div>
+  <div style="position: absolute; left: 770px; top: 422px; transform: translate(-50%, -50%); padding: 3px 8px; background: #FBFAF7; font-size: 11px; font-weight: 700; color: #6C6A66; white-space: nowrap;">Cache 60 s</div>
+  <div style="position: absolute; left: 634px; top: 404px; transform: translate(-50%, -50%); padding: 3px 8px; background: #FBFAF7; font-size: 11px; font-weight: 700; color: #6C6A66; white-space: nowrap;">Complétions</div>
+
+  <div style="position: absolute; left: 48px; top: 574px; width: 1024px; padding-top: 16px; border-top: 1px solid #EBE6DD; font-size: 11.5px; font-weight: 600; color: #8A867E;">Les contenus consultés sont mis en cache sur l'appareil : la visite reste possible sans réseau, l'assistant IA reprend à la reconnexion.</div>
+
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; width: 390px; height: 844px; overflow: hidden;
+           font-family: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
+           background: #FBFAF7; color: #101A2B;
+           -webkit-font-smoothing: antialiased; }
+    a { color: #B5653C; text-decoration: none; }
+    a:hover { color: #8F4B2A; }
+  </style>
+</helmet>
+
+<div style="width: 390px; height: 844px; background: #FBFAF7; display: flex; flex-direction: column; overflow: hidden;">
+
+  <div style="height: 44px; flex-shrink: 0;"></div>
+
+  <div style="flex-shrink: 0; height: 56px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between;">
+    <div style="font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-size: 27px; line-height: 31px; color: #101A2B;">Profil</div>
+    <div style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: flex-end;">
+      <div style="width: 34px; height: 34px; border-radius: 17px; background: #FFFFFF; border: 1px solid #E6E1D8; display: flex; align-items: center; justify-content: center;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#3D4655" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1" /><path d="M19.2 14.6a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1v.3a2 2 0 1 1-4 0v-.2a1.6 1.6 0 0 0-2.8-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 1 1 0-4h.2a1.6 1.6 0 0 0 1.1-2.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 2.7-1.1V3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 2.8 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7h.3a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.4 1z" /></svg>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex: 1; padding: 6px 20px 0; overflow: hidden;">
+
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <div style="width: 68px; height: 68px; border-radius: 24px; background: #101A2B; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <span style="font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-size: 26px; color: #E8C9A8; letter-spacing: 0.5px;">CR</span>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+        <div style="font-size: 19px; font-weight: 800; color: #101A2B; letter-spacing: -0.2px;">Camille Renaud</div>
+        <div style="font-size: 12.5px; font-weight: 600; color: #9A968E;">camille.renaud@mail.fr</div>
+        <div style="align-self: flex-start; margin-top: 3px; padding: 4px 9px; border-radius: 7px; background: #F6EBE4; font-size: 10.5px; font-weight: 800; letter-spacing: 0.4px; color: #B5653C; text-transform: uppercase;">Pass annuel · 2026</div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 10px; margin-top: 20px;">
+      <div style="flex: 1; padding: 14px 12px; border-radius: 16px; background: #FFFFFF; border: 1px solid #EBE6DD; display: flex; flex-direction: column; gap: 3px;">
+        <div style="font-size: 22px; font-weight: 800; color: #101A2B; letter-spacing: -0.5px; line-height: 24px;">24</div>
+        <div style="font-size: 11px; font-weight: 700; color: #9A968E;">Découvertes</div>
+      </div>
+      <div style="flex: 1; padding: 14px 12px; border-radius: 16px; background: #FFFFFF; border: 1px solid #EBE6DD; display: flex; flex-direction: column; gap: 3px;">
+        <div style="font-size: 22px; font-weight: 800; color: #101A2B; letter-spacing: -0.5px; line-height: 24px;">6</div>
+        <div style="font-size: 11px; font-weight: 700; color: #9A968E;">Favoris</div>
+      </div>
+      <div style="flex: 1; padding: 14px 12px; border-radius: 16px; background: #FFFFFF; border: 1px solid #EBE6DD; display: flex; flex-direction: column; gap: 3px;">
+        <div style="font-size: 22px; font-weight: 800; color: #101A2B; letter-spacing: -0.5px; line-height: 24px;">3</div>
+        <div style="font-size: 11px; font-weight: 700; color: #9A968E;">Visites</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 22px; font-size: 10px; font-weight: 800; letter-spacing: 0.6px; color: #9A968E; text-transform: uppercase;">Compte</div>
+    <div style="margin-top: 9px; border-radius: 16px; background: #FFFFFF; border: 1px solid #EBE6DD; overflow: hidden;">
+      <div style="height: 54px; padding: 0 15px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #F1EDE5;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#4A4842" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><circle cx="12" cy="8.2" r="3.8" /><path d="M4.6 20a7.4 7.4 0 0 1 14.8 0" /></svg>
+        <span style="flex: 1; font-size: 14px; font-weight: 600; color: #101A2B;">Informations personnelles</span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B8B3AA" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+      </div>
+      <div style="height: 54px; padding: 0 15px; display: flex; align-items: center; gap: 12px;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#4A4842" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><rect x="3" y="5.5" width="18" height="13" rx="2.4" /><path d="M3 10h18" /></svg>
+        <span style="flex: 1; font-size: 14px; font-weight: 600; color: #101A2B;">Abonnement et billets</span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B8B3AA" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; font-size: 10px; font-weight: 800; letter-spacing: 0.6px; color: #9A968E; text-transform: uppercase;">Préférences</div>
+    <div style="margin-top: 9px; border-radius: 16px; background: #FFFFFF; border: 1px solid #EBE6DD; overflow: hidden;">
+      <div style="height: 54px; padding: 0 15px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #F1EDE5;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#4A4842" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M18 8a6 6 0 1 0-12 0c0 5-2 6-2 6h16s-2-1-2-6" /><path d="M10.5 20a2 2 0 0 0 3 0" /></svg>
+        <span style="flex: 1; font-size: 14px; font-weight: 600; color: #101A2B;">Notifications</span>
+        <div style="width: 40px; height: 23px; border-radius: 12px; background: #101A2B; padding: 2.5px; display: flex; justify-content: flex-end;">
+          <div style="width: 18px; height: 18px; border-radius: 9px; background: #FBFAF7;"></div>
+        </div>
+      </div>
+      <div style="height: 54px; padding: 0 15px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #F1EDE5;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#4A4842" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><circle cx="12" cy="12" r="8.6" /><path d="M3.4 12h17.2M12 3.4a14 14 0 0 1 0 17.2 14 14 0 0 1 0-17.2" /></svg>
+        <span style="flex: 1; font-size: 14px; font-weight: 600; color: #101A2B;">Langue</span>
+        <span style="font-size: 13px; font-weight: 700; color: #9A968E;">Français</span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B8B3AA" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+      </div>
+      <div style="height: 54px; padding: 0 15px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #F1EDE5;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#4A4842" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><circle cx="12" cy="4.4" r="1.8" /><path d="M4.6 8.2h14.8M12 8.2v6M12 14.2l-3 6.4M12 14.2l3 6.4" /></svg>
+        <span style="flex: 1; font-size: 14px; font-weight: 600; color: #101A2B;">Accessibilité</span>
+        <span style="font-size: 13px; font-weight: 700; color: #9A968E;">Texte large</span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B8B3AA" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+      </div>
+      <div style="height: 54px; padding: 0 15px; display: flex; align-items: center; gap: 12px;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#4A4842" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M12 3.5v11M8 10.5l4 4 4-4" /><path d="M5 19.5h14" /></svg>
+        <span style="flex: 1; font-size: 14px; font-weight: 600; color: #101A2B;">Contenus hors connexion</span>
+        <span style="font-size: 13px; font-weight: 700; color: #9A968E;">24 Mo</span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B8B3AA" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+      </div>
+    </div>
+
+    <div style="margin-top: 18px; height: 48px; display: flex; align-items: center; justify-content: center;">
+      <span style="font-size: 14px; font-weight: 700; color: #B5653C;">Se déconnecter</span>
+    </div>
+
+  </div>
+
+  <div style="flex-shrink: 0; height: 88px; padding: 10px 10px 22px; background: #FFFFFF; border-top: 1px solid #E6E1D8; display: flex; align-items: flex-start; justify-content: space-between;">
+    <div style="width: 66px; height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#9A968E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.6 12 3.4l9 7.2V20a1 1 0 0 1-1 1h-4.6v-6.4H9.6V21H5a1 1 0 0 1-1-1z" /></svg>
+      <span style="font-size: 10px; font-weight: 700; color: #9A968E; letter-spacing: 0.1px;">Accueil</span>
+    </div>
+    <div style="width: 66px; height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#9A968E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.6 3.6 6.9v12.5L9 17.1l6 2.3 5.4-2.3V4.6L15 6.9z" /><path d="M9 4.6v12.5M15 6.9v12.5" /></svg>
+      <span style="font-size: 10px; font-weight: 700; color: #9A968E; letter-spacing: 0.1px;">Ma visite</span>
+    </div>
+    <div style="width: 66px; height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 4px;">
+      <div style="width: 46px; height: 34px; border-radius: 12px; background: #101A2B; display: flex; align-items: center; justify-content: center;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FBFAF7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V5.6A1.6 1.6 0 0 1 5.6 4h2.9M15.5 4h2.9A1.6 1.6 0 0 1 20 5.6v2.9M20 15.5v2.9a1.6 1.6 0 0 1-1.6 1.6h-2.9M8.5 20H5.6A1.6 1.6 0 0 1 4 18.4v-2.9M7.6 12h8.8" /></svg>
+      </div>
+      <span style="font-size: 10px; font-weight: 700; color: #9A968E; letter-spacing: 0.1px;">Scanner</span>
+    </div>
+    <div style="width: 66px; height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#9A968E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.2s-7.4-4.5-7.4-9.7A4.4 4.4 0 0 1 12 7.4a4.4 4.4 0 0 1 7.4 3.1c0 5.2-7.4 9.7-7.4 9.7z" /></svg>
+      <span style="font-size: 10px; font-weight: 700; color: #9A968E; letter-spacing: 0.1px;">Favoris</span>
+    </div>
+    <div style="width: 66px; height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#101A2B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.2" r="3.8" /><path d="M4.6 20a7.4 7.4 0 0 1 14.8 0" /></svg>
+      <span style="font-size: 10px; font-weight: 800; color: #101A2B; letter-spacing: 0.1px;">Profil</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

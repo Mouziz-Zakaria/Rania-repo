@@ -1,0 +1,20 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 390, "h": 844, "title": "1 · Accueil" },
+    { "file": "Scanner.dc.html", "x": 470, "y": 0, "w": 390, "h": 844, "title": "2 · Scanner QR" },
+    { "file": "Exposition.dc.html", "x": 940, "y": 0, "w": 390, "h": 844, "title": "3 · Exposition" },
+    { "file": "Assistant.dc.html", "x": 1410, "y": 0, "w": 390, "h": 844, "title": "4 · Assistant IA" },
+    { "file": "Visite.dc.html", "x": 0, "y": 1000, "w": 390, "h": 844, "title": "5 · Ma visite" },
+    { "file": "Favoris.dc.html", "x": 470, "y": 1000, "w": 390, "h": 844, "title": "6 · Favoris" },
+    { "file": "HorsConnexion.dc.html", "x": 940, "y": 1000, "w": 390, "h": 844, "title": "7 · Hors connexion" },
+    { "file": "Profil.dc.html", "x": 1410, "y": 1000, "w": 390, "h": 844, "title": "8 · Profil" },
+    { "file": "Architecture.dc.html", "x": 0, "y": 2000, "w": 1120, "h": 620, "title": "Architecture technique" },
+    { "file": "Flow.dc.html", "x": 0, "y": 2740, "w": 1440, "h": 420, "title": "Parcours utilisateur" }
+  ],
+  "annotations": [
+    { "id": "row-parcours", "x": 0, "y": -104, "w": 520, "text": "Parcours de visite — accueil, scan du cartel, fiche d'exposition, assistant IA." },
+    { "id": "row-compte", "x": 0, "y": 896, "w": 520, "text": "Suivi et compte — progression de la visite, favoris, mode hors connexion, profil." },
+    { "id": "row-technique", "x": 0, "y": 1896, "w": 520, "text": "Vue technique — architecture des services et parcours utilisateur de bout en bout." }
+  ],
+  "launch": { "view": "canvas" }
+}
