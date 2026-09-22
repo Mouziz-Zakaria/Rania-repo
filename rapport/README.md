@@ -42,12 +42,19 @@ humaine, et un chapitre **« L'IA dans la communication »**.
 
 ### Ouvrir / présenter
 
-- **PDF prêt à diffuser** : [`outils-open-source.pdf`](outils-open-source.pdf) (A4, 17 pages).
+- **PDF prêt à diffuser** : [`outils-open-source.pdf`](outils-open-source.pdf) — calque
+  **exact du HTML** : une seule **page continue** (1000 px de large), pas de format A4,
+  pas de marges de page, couverture pleine largeur.
 - **Version web** : ouvrir [`outils-open-source.html`](outils-open-source.html) dans un navigateur.
 
-> Le PDF est régénéré depuis le HTML avec Chromium headless
-> (`chrome --headless --print-to-pdf`), la mise en page `@media print` étant
-> optimisée pour l'A4 (fonds de couleur, sauts de page, tableau à en-tête répété).
+> Régénérer le PDF après une modif du HTML :
+> ```bash
+> pip install playwright        # une fois, pour mesurer la hauteur du contenu
+> python3 build-pdf.py
+> ```
+> Le script ([`build-pdf.py`](build-pdf.py)) retire le bloc `@media print`, fixe une
+> `@page` unique à la taille réelle du contenu et imprime via Chromium headless.
+> Le HTML n'est pas modifié.
 
 ### À confirmer sur place
 
