@@ -42,8 +42,12 @@ humaine, et un chapitre **« L'IA dans la communication »**.
 
 ### Ouvrir / présenter
 
-Ouvrir `outils-open-source.html` dans un navigateur. Pour une version PDF à diffuser :
-*Fichier → Imprimer → Enregistrer au format PDF* (mise en page optimisée pour l'impression).
+- **PDF prêt à diffuser** : [`outils-open-source.pdf`](outils-open-source.pdf) (A4, 17 pages).
+- **Version web** : ouvrir [`outils-open-source.html`](outils-open-source.html) dans un navigateur.
+
+> Le PDF est régénéré depuis le HTML avec Chromium headless
+> (`chrome --headless --print-to-pdf`), la mise en page `@media print` étant
+> optimisée pour l'A4 (fonds de couleur, sauts de page, tableau à en-tête répété).
 
 ### À confirmer sur place
 

@@ -179,12 +179,27 @@
     .matrix{grid-template-columns:1fr}
     .matrix > div:nth-child(3n+1),.matrix > div:nth-child(3n+2){border-right:0}
   }
+  @page{ size:A4; margin:12mm; }
   @media print{
-    .cover{background:#1c2f6b !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
-    body{font-size:12pt}
-    .tool,.note,.step .dot,table.cmp thead th,.badge{-webkit-print-color-adjust:exact; print-color-adjust:exact}
-    a{border:0}
-    section{break-inside:avoid-page}
+    *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    body{font-size:11pt; line-height:1.5}
+    a{border:0 !important; color:var(--primary)}
+    .cover{background:#1c2f6b !important; margin:0}
+    .cover .wrap,.wrap{padding-left:0; padding-right:0}
+    /* n'éviter la coupure que sur les PETITS blocs -> pas de grands blancs */
+    .note,.cols .box,.legend .item,.step,tr,.src li,.specs{break-inside:avoid}
+    /* les grandes fiches peuvent s'écouler, mais l'en-tête reste avec son contenu */
+    .tool{break-inside:auto}
+    .tool-head{break-inside:avoid; break-after:avoid}
+    .tool-body h4{break-after:avoid}
+    h2,h3,h4{break-after:avoid}
+    section{margin-top:24px}
+    /* tableau comparatif : tenir dans la largeur A4 */
+    .table-scroll{overflow:visible; border:0}
+    table.cmp{min-width:0; width:100%; font-size:9.5pt}
+    table.cmp th,table.cmp td{padding:6px 8px}
+    table.cmp thead th{position:static}
+    table.cmp tbody th{width:130px}
   }
 </style>
 </head>
