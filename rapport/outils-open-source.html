@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exploradôme — Outils open source &amp; automatisation</title>
+<meta name="description" content="Volet outils du rapport professionnel Exploradôme : 4 outils réellement open source et gratuits pour la communication, scénarios d'automatisation et usage de l'IA.">
+<style>
+  :root{
+    --bg:#ffffff; --panel:#f6f8fb; --panel2:#eef2f8;
+    --ink:#161d2b; --muted:#5b6472; --line:#e2e7ef;
+    --primary:#254aa6; --primary-soft:#e8edf9;
+    --accent:#0e8f8f; --accent-soft:#e0f2f1;
+    --verif:#1f8a4c; --verif-soft:#e6f4ec;
+    --site:#2563eb; --site-soft:#e7effe;
+    --obs:#7c3aed; --obs-soft:#f0e9fd;
+    --prop:#b45309; --prop-soft:#fbefdd;
+    --warn:#b42318; --warn-soft:#fdeceb;
+    --radius:14px;
+    --font:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--font); font-size:16px; line-height:1.6;
+  }
+  .wrap{max-width:960px; margin:0 auto; padding:0 20px 80px}
+
+  /* ---------- Cover ---------- */
+  .cover{
+    background:linear-gradient(135deg,#1c2f6b 0%,#254aa6 55%,#0e8f8f 130%);
+    color:#fff; padding:56px 0 44px; margin-bottom:8px;
+  }
+  .cover .wrap{padding-bottom:0}
+  .eyebrow{
+    text-transform:uppercase; letter-spacing:.16em; font-size:12.5px;
+    font-weight:700; opacity:.85; margin:0 0 14px;
+  }
+  .cover h1{font-size:34px; line-height:1.15; margin:0 0 10px; font-weight:800; letter-spacing:-.01em}
+  .cover .sub{font-size:18px; opacity:.94; margin:0 0 22px; max-width:640px}
+  .cover .meta{display:flex; flex-wrap:wrap; gap:10px 26px; font-size:14px; opacity:.92; border-top:1px solid rgba(255,255,255,.25); padding-top:16px}
+  .cover .meta b{font-weight:700}
+
+  /* ---------- Structure ---------- */
+  section{margin-top:40px}
+  h2{
+    font-size:23px; line-height:1.2; margin:0 0 6px; font-weight:800;
+    letter-spacing:-.01em; color:var(--ink);
+  }
+  h2 .num{color:var(--primary); font-weight:800}
+  h3{font-size:18px; margin:26px 0 8px; font-weight:750}
+  h4{font-size:15.5px; margin:18px 0 6px; font-weight:700; color:var(--primary)}
+  .lead{color:var(--muted); font-size:16px; margin:0 0 4px}
+  p{margin:10px 0}
+  a{color:var(--primary); text-decoration:none; border-bottom:1px solid #c9d4ec}
+  a:hover{border-color:var(--primary)}
+  hr.sep{border:0; border-top:1px solid var(--line); margin:34px 0}
+  ul,ol{margin:10px 0; padding-left:22px}
+  li{margin:5px 0}
+  strong{font-weight:700}
+  code{background:var(--panel2); padding:1px 6px; border-radius:6px; font-size:.9em; font-family:ui-monospace,"Cascadia Code",Consolas,monospace}
+  small{color:var(--muted)}
+
+  .kicker{display:inline-block; background:var(--primary-soft); color:var(--primary);
+    font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:4px 10px; border-radius:999px; margin-bottom:10px}
+
+  /* ---------- Badges d'origine de l'information ---------- */
+  .badge{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700;
+    padding:3px 9px; border-radius:999px; line-height:1.3; white-space:nowrap; vertical-align:middle}
+  .b-verif{background:var(--verif-soft); color:var(--verif)}
+  .b-site{background:var(--site-soft); color:var(--site)}
+  .b-obs{background:var(--obs-soft); color:var(--obs)}
+  .b-prop{background:var(--prop-soft); color:var(--prop)}
+
+  .legend{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin:16px 0 0}
+  .legend .item{display:flex; gap:10px; align-items:flex-start; background:var(--panel);
+    border:1px solid var(--line); border-radius:12px; padding:12px 14px}
+  .legend .item p{margin:2px 0 0; font-size:13.5px; color:var(--muted)}
+
+  /* ---------- Callouts ---------- */
+  .note{border-left:4px solid var(--line); background:var(--panel); border-radius:0 12px 12px 0;
+    padding:12px 16px; margin:14px 0; font-size:14.5px}
+  .note .badge{margin-bottom:6px}
+  .note.verif{border-color:var(--verif); background:var(--verif-soft)}
+  .note.site{border-color:var(--site); background:var(--site-soft)}
+  .note.obs{border-color:var(--obs); background:var(--obs-soft)}
+  .note.prop{border-color:var(--prop); background:var(--prop-soft)}
+  .note.warn{border-color:var(--warn); background:var(--warn-soft)}
+  .note p{margin:6px 0}
+  .note p:first-of-type{margin-top:0}
+
+  /* ---------- Cartes outils ---------- */
+  .tool{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; margin:22px 0; background:#fff;
+    box-shadow:0 1px 2px rgba(20,29,43,.04)}
+  .tool-head{padding:18px 20px; background:var(--panel); border-bottom:1px solid var(--line)}
+  .tool-head .row{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+  .tool-head .idx{width:34px; height:34px; flex:0 0 34px; border-radius:9px; background:var(--primary); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:16px}
+  .tool-head h3{margin:0; font-size:20px}
+  .tool-head .role{color:var(--muted); font-size:13.5px; font-weight:600; margin-top:2px}
+  .tool-head .links{margin-left:auto; font-size:13px; display:flex; gap:14px; flex-wrap:wrap}
+  .tool-body{padding:18px 20px}
+  .tool-body h4:first-child{margin-top:0}
+
+  .specs{display:grid; grid-template-columns:repeat(2,1fr); gap:0; border:1px solid var(--line);
+    border-radius:12px; overflow:hidden; margin:6px 0 14px}
+  .specs div{padding:10px 14px; font-size:14px; border-top:1px solid var(--line)}
+  .specs div:nth-child(1),.specs div:nth-child(2){border-top:0}
+  .specs div:nth-child(odd){background:var(--panel); border-right:1px solid var(--line)}
+  .specs .k{display:block; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:700; margin-bottom:2px}
+
+  .cols{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:12px 0}
+  .cols .box{border:1px solid var(--line); border-radius:12px; padding:12px 16px; background:#fff}
+  .cols .box.pro{background:var(--verif-soft); border-color:#bfe3cd}
+  .cols .box.con{background:var(--warn-soft); border-color:#f3cfcb}
+  .cols .box h5{margin:0 0 6px; font-size:14px; font-weight:750}
+  .cols .box ul{margin:0; padding-left:18px}
+  .cols .box li{font-size:13.8px; margin:4px 0}
+
+  /* ---------- Tableau comparatif ---------- */
+  .table-scroll{overflow-x:auto; margin:14px 0; border:1px solid var(--line); border-radius:12px}
+  table.cmp{border-collapse:collapse; width:100%; min-width:720px; font-size:13.5px}
+  table.cmp th,table.cmp td{padding:10px 13px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+  table.cmp thead th{background:var(--primary); color:#fff; font-size:13px; position:sticky; top:0}
+  table.cmp thead th:first-child{border-top-left-radius:0}
+  table.cmp tbody th{background:var(--panel); font-weight:700; width:170px; color:var(--ink)}
+  table.cmp tbody tr:nth-child(even) td,table.cmp tbody tr:nth-child(even) th{background:#fafbfd}
+  table.cmp td .yes{color:var(--verif); font-weight:700}
+  table.cmp td .no{color:var(--muted); font-weight:700}
+  table.cmp td .part{color:var(--prop); font-weight:700}
+
+  /* ---------- Workflow ---------- */
+  .flow{display:flex; flex-direction:column; gap:0; margin:16px 0}
+  .step{display:grid; grid-template-columns:44px 1fr; gap:14px; position:relative; padding-bottom:18px}
+  .step:not(:last-child)::before{content:""; position:absolute; left:21px; top:38px; bottom:-4px; width:2px; background:var(--line)}
+  .step .dot{width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:#fff; font-size:15px; z-index:1}
+  .step .body{padding-top:3px}
+  .step .body .t{font-weight:700; font-size:15px}
+  .step .body .d{font-size:14px; color:var(--muted); margin-top:2px}
+  .actor{display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; margin-left:8px; vertical-align:middle}
+  .a-hum{background:var(--obs-soft); color:var(--obs)}
+  .a-ia{background:var(--accent-soft); color:var(--accent)}
+  .a-tool{background:var(--primary-soft); color:var(--primary)}
+  .d-hum{background:#7c3aed} .d-ia{background:#0e8f8f} .d-tool{background:#254aa6}
+
+  .pill-tools{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px}
+  .pill-tools span{font-size:12px; font-weight:600; background:var(--panel2); border:1px solid var(--line); padding:2px 9px; border-radius:999px}
+
+  /* ---------- TOC ---------- */
+  .toc{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 22px; margin-top:26px}
+  .toc h2{font-size:15px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-bottom:10px}
+  .toc ol{margin:0; padding-left:20px; columns:2; column-gap:32px}
+  .toc a{border:0; font-weight:600; font-size:14.5px}
+  .toc li{margin:4px 0; break-inside:avoid}
+
+  .matrix{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:0; border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:14px; margin:14px 0}
+  .matrix > div{padding:11px 14px; border-top:1px solid var(--line)}
+  .matrix > div:nth-child(-n+3){border-top:0; background:var(--primary); color:#fff; font-weight:700; font-size:13px}
+  .matrix > div:nth-child(3n+1){border-right:1px solid var(--line); font-weight:600}
+  .matrix > div:nth-child(3n+2){border-right:1px solid var(--line)}
+
+  .src{font-size:13.5px}
+  .src li{margin:7px 0}
+  .src .tag{display:inline-block; min-width:92px; font-weight:700; color:var(--muted); font-size:12px}
+
+  footer.doc{margin-top:50px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+
+  @media (max-width:680px){
+    .legend{grid-template-columns:1fr}
+    .cols{grid-template-columns:1fr}
+    .specs{grid-template-columns:1fr}
+    .specs div:nth-child(2){border-top:1px solid var(--line)}
+    .specs div:nth-child(odd){border-right:0}
+    .toc ol{columns:1}
+    .cover h1{font-size:27px}
+    .matrix{grid-template-columns:1fr}
+    .matrix > div:nth-child(3n+1),.matrix > div:nth-child(3n+2){border-right:0}
+  }
+  @media print{
+    .cover{background:#1c2f6b !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+    body{font-size:12pt}
+    .tool,.note,.step .dot,table.cmp thead th,.badge{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    a{border:0}
+    section{break-inside:avoid-page}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="wrap">
+    <p class="eyebrow">Rapport professionnel — Exploradôme · Volet 6</p>
+    <h1>Outils open source &amp; automatisation de la communication</h1>
+    <p class="sub">Quatre outils <strong>réellement open source et gratuits</strong> pour soutenir la communication et la médiation numérique de l'Exploradôme, avec scénarios d'automatisation et usage raisonné de l'IA.</p>
+    <div class="meta">
+      <span><b>Auteure</b> — Étudiante en Master 2 Intelligence Artificielle</span>
+      <span><b>Contexte</b> — Après visite &amp; entretien</span>
+      <span><b>Date</b> — Septembre 2026</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- Comment lire -->
+  <section id="lecture" style="margin-top:30px">
+    <span class="kicker">Comment lire ce document</span>
+    <h2>Distinguer les sources d'information</h2>
+    <p class="lead">Conformément à une démarche de recherche rigoureuse, chaque affirmation est étiquetée selon son origine. Rien d'incertain n'est présenté comme un fait.</p>
+    <div class="legend">
+      <div class="item"><span class="badge b-verif">✔ Fait vérifié</span>
+        <p>Information contrôlée directement à la source officielle (dépôt de code, licence, documentation) et citée en fin de rapport.</p></div>
+      <div class="item"><span class="badge b-site">🌐 Site / source Exploradôme</span>
+        <p>Information issue de l'Exploradôme ou de sources publiques le décrivant. <em>Le site officiel exploradome.fr n'a pas pu être consulté directement depuis cet environnement</em> : à confirmer sur place.</p></div>
+      <div class="item"><span class="badge b-obs">👁 Mon observation</span>
+        <p>Constat personnel issu de ma visite et de mon entretien. <em>À personnaliser / valider avec mes notes de terrain.</em></p></div>
+      <div class="item"><span class="badge b-prop">💡 Ma proposition</span>
+        <p>Recommandation ou piste d'usage que je formule. Ce n'est pas un fait mais une suggestion argumentée.</p></div>
+    </div>
+    <div class="note warn" style="margin-top:16px">
+      <p><strong>Note de transparence méthodologique.</strong> Les licences et fonctionnalités des quatre outils ont été vérifiées sur leurs dépôts GitHub et pages officielles (septembre 2026). En revanche, l'accès réseau au site <code>exploradome.fr</code> était bloqué au moment de la rédaction : les éléments de contexte sur l'Exploradôme proviennent donc de <strong>sources secondaires publiques</strong> (office de tourisme du Val‑de‑Marne, ville de Vitry‑sur‑Seine, presse locale) et de la page officielle « Intelligence Artificielle » indexée. Ils devront être <strong>confirmés</strong> avec l'équipe.</p>
+    </div>
+  </section>
+
+  <div class="toc">
+    <h2>Sommaire</h2>
+    <ol>
+      <li><a href="#contexte">Contexte &amp; besoins de communication</a></li>
+      <li><a href="#criteres">Critères de sélection (et pourquoi pas n8n)</a></li>
+      <li><a href="#outils">Les 4 outils en détail</a></li>
+      <li><a href="#compare">Tableau comparatif</a></li>
+      <li><a href="#scenarios">Scénarios d'automatisation</a></li>
+      <li><a href="#ia">L'IA dans la communication</a></li>
+      <li><a href="#synthese">Synthèse &amp; recommandations</a></li>
+      <li><a href="#sources">Sources</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. Contexte -->
+  <section id="contexte">
+    <h2><span class="num">1.</span> Contexte &amp; besoins de communication</h2>
+
+    <div class="note site">
+      <span class="badge b-site">🌐 Source Exploradôme</span>
+      <p>L'Exploradôme est un <strong>musée interactif des sciences et du numérique</strong>, installé à <strong>Vitry‑sur‑Seine (94) depuis 2009</strong>. Il propose une cinquantaine de modules interactifs (« manips ») — illusions d'optique, climat, énergie, mouvement — et des ateliers de médiation animés tout au long de l'année. Publics : <strong>familles, enfants (dès 4 ans), adolescents, adultes et groupes scolaires</strong>. Parmi les ateliers thématiques figurent l'<strong>intelligence artificielle</strong>, la cybersécurité, l'information / désinformation, le montage vidéo, la robotique, l'astronomie et le climat.</p>
+      <p style="margin-bottom:0"><small>Sources secondaires : Val‑de‑Marne Tourisme, ville de Vitry‑sur‑Seine, Sortiraparis, ainsi que la page officielle <code>exploradome.fr/intelligence-artificielle</code> (à consulter directement).</small></p>
+    </div>
+
+    <p>La communication d'une structure de médiation scientifique comme l'Exploradôme repose sur des tâches <strong>récurrentes, multi‑canal et à forte saisonnalité</strong> (vacances scolaires, Fête de la science, nouveaux ateliers). Ce sont précisément ces tâches répétitives qui peuvent être <strong>outillées, assistées par l'IA et partiellement automatisées</strong> — sans jamais retirer la validation humaine.</p>
+
+    <div class="note obs">
+      <span class="badge b-obs">👁 Mon observation</span>
+      <p>Lors de ma visite et de mon entretien, j'ai identifié une petite équipe qui porte à la fois la médiation et la communication. Le temps consacré aux réseaux sociaux, aux newsletters et aux mises à jour du site est <em>fractionné</em> et se fait souvent « à la main », canal par canal.</p>
+      <p style="margin-bottom:0"><em>(À ajuster selon mes notes exactes : nombre de personnes, outils déjà en place, fréquence de publication, etc.)</em></p>
+    </div>
+
+    <h3>Tâches de communication améliorables ou automatisables</h3>
+    <p>Cartographie des tâches concernées, base de tout le raisonnement outils qui suit :</p>
+    <div class="matrix">
+      <div>Domaine</div><div>Tâches concrètes</div><div>Piste d'amélioration</div>
+
+      <div>Réseaux sociaux</div>
+      <div>Publier ateliers &amp; événements sur Instagram, Facebook, LinkedIn ; adapter le format par réseau ; programmer à l'avance.</div>
+      <div>Centraliser + programmer en une fois sur tous les réseaux ; réutiliser un contenu-source.</div>
+
+      <div>Création &amp; programmation</div>
+      <div>Écrire les publications, choisir visuels, planifier le calendrier éditorial.</div>
+      <div>Gabarits + file d'attente + génération assistée de brouillons.</div>
+
+      <div>Newsletters / e‑mails</div>
+      <div>Composer la newsletter, gérer les listes (familles, enseignants, partenaires), envoyer, suivre.</div>
+      <div>Segmentation, gabarits réutilisables, statistiques d'ouverture / clics.</div>
+
+      <div>Site web / actualités</div>
+      <div>Créer les pages ateliers &amp; événements, mettre à jour l'agenda, publier des actualités.</div>
+      <div>Publication semi‑automatique depuis une fiche unique ; agenda structuré.</div>
+
+      <div>Contenus &amp; visuels</div>
+      <div>Rédiger, décliner par public, créer / adapter des visuels et gabarits.</div>
+      <div>Assistance IA à la rédaction et à l'adaptation ; bibliothèque de gabarits.</div>
+
+      <div>Veille</div>
+      <div>Suivre l'actualité sciences / médiation / éducation pour nourrir les contenus.</div>
+      <div>Flux RSS agrégés + résumés IA périodiques.</div>
+
+      <div>Statistiques &amp; suivi</div>
+      <div>Mesurer engagement réseaux, ouvertures newsletters, fréquentation des pages.</div>
+      <div>Collecte automatique + récapitulatif régulier.</div>
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- 2. Critères -->
+  <section id="criteres">
+    <h2><span class="num">2.</span> Critères de sélection <span style="font-weight:600; color:var(--muted); font-size:16px">(et pourquoi pas n8n)</span></h2>
+    <p class="lead">Le brief demande des outils <strong>réellement open source ET gratuits</strong> — pas des produits commerciaux avec une version gratuite bridée. J'ai donc vérifié, pour chaque candidat, la licence à la source.</p>
+
+    <h3>Ce que « réellement open source » veut dire</h3>
+    <p>Une licence est <strong>open source</strong> au sens strict lorsqu'elle est approuvée par l'<a href="https://opensource.org/licenses" target="_blank" rel="noopener">Open Source Initiative (OSI)</a> : elle garantit le droit d'utiliser, d'étudier, de modifier et de redistribuer le logiciel <em>sans restriction d'usage</em>. Les licences <strong>MIT</strong>, <strong>GPL</strong> et <strong>AGPL</strong> répondent à ce critère. À l'inverse, une licence <em>« source‑available »</em> ou <em>« fair‑code »</em> laisse voir le code mais <strong>restreint l'usage commercial</strong> : ce n'est pas de l'open source au sens OSI.</p>
+
+    <div class="note warn">
+      <span class="badge b-verif">✔ Fait vérifié</span>
+      <p><strong>Cas n8n — écarté volontairement.</strong> n8n est un excellent outil d'automatisation, souvent présenté comme « open source ». Or il est publié sous <strong>Sustainable Use License</strong>, une licence <em>fair‑code / source‑available</em> créée par n8n. L'entreprise elle‑même reconnaît, en s'appuyant sur la définition de l'OSI, que <strong>n8n n'est pas open source</strong> : la licence limite l'usage aux besoins internes / non commerciaux et réserve certains usages. Je l'ai donc <strong>remplacé par Activepieces (licence MIT)</strong> pour rester fidèle à l'exigence du rapport, tout en le mentionnant comme alternative connue.</p>
+      <p style="margin-bottom:0"><small>Sources : documentation officielle n8n (Sustainable Use License) et fichier <code>LICENSE.md</code> du dépôt n8n.</small></p>
+    </div>
+
+    <h3>Grille de vérification appliquée à chaque outil</h3>
+    <p>Pour chacun des 4 outils retenus, j'ai contrôlé : <strong>licence</strong> (fichier LICENSE du dépôt), <strong>gratuité</strong>, <strong>auto‑hébergement</strong> possible, <strong>coûts éventuels</strong> (serveur, envoi d'e‑mails), <strong>fonctionnalités</strong> et automatisations, <strong>capacités IA</strong>, <strong>intégrations / API / webhooks</strong>, <strong>facilité</strong> et <strong>compétences techniques nécessaires</strong>, puis <strong>avantages / limites</strong>.</p>
+
+    <div class="note prop">
+      <span class="badge b-prop">💡 Ma proposition</span>
+      <p style="margin:0">Retenir <strong>quatre outils complémentaires</strong>, chacun couvrant un besoin distinct, plutôt qu'un seul outil « tout‑en‑un » : <strong>Postiz</strong> (réseaux sociaux), <strong>Listmonk</strong> (newsletters), <strong>Activepieces</strong> (automatisation + IA, le « chef d'orchestre ») et <strong>WordPress</strong> (site / CMS). Ils peuvent fonctionner séparément ou être reliés entre eux.</p>
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- 3. Les outils -->
+  <section id="outils">
+    <h2><span class="num">3.</span> Les 4 outils en détail</h2>
+    <p class="lead">Chaque fiche suit la même structure. Les mentions de licence, de dépôt et de fonctionnalités sont des <span class="badge b-verif">✔ faits vérifiés</span> ; les usages Exploradôme sont des <span class="badge b-prop">💡 propositions</span>.</p>
+
+    <!-- Outil 1 : Postiz -->
+    <article class="tool" id="postiz">
+      <div class="tool-head">
+        <div class="row">
+          <div class="idx">1</div>
+          <div>
+            <h3>Postiz</h3>
+            <div class="role">Gestion &amp; programmation des réseaux sociaux</div>
+          </div>
+          <div class="links">
+            <a href="https://postiz.com" target="_blank" rel="noopener">Site officiel</a>
+            <a href="https://github.com/gitroomhq/postiz-app" target="_blank" rel="noopener">Dépôt GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <p><strong>En bref :</strong> Postiz est un gestionnaire de réseaux sociaux auto‑hébergeable qui permet de <strong>rédiger une fois</strong> un contenu, de le <strong>décliner par réseau</strong> et de le <strong>programmer</strong> sur de nombreuses plateformes depuis un seul calendrier. C'est une alternative libre à Buffer / Hootsuite / Later.</p>
+
+        <div class="specs">
+          <div><span class="k">Licence</span> <span class="badge b-verif">✔ AGPL‑3.0</span> — open source (OSI)</div>
+          <div><span class="k">Gratuité</span> Logiciel 100 % gratuit ; version auto‑hébergée à parité avec le cloud</div>
+          <div><span class="k">Auto‑hébergement</span> Oui — Docker (Next.js / NestJS, base PostgreSQL, file Redis, moteur de tâches Temporal)</div>
+          <div><span class="k">Coûts éventuels</span> Serveur VPS (≈ 4 Go RAM) ; création d'« apps développeur » sur certains réseaux</div>
+          <div><span class="k">Facilité</span> Interface simple pour publier ; installation technique moyenne</div>
+          <div><span class="k">Compétences requises</span> Notions Docker / serveur pour l'installation ; usage quotidien sans code</div>
+        </div>
+
+        <h4>Fonctionnalités clés</h4>
+        <ul>
+          <li><strong>Publication multi‑réseaux</strong> : Instagram, Facebook, LinkedIn, X, TikTok, YouTube, Pinterest, Threads, Mastodon, Bluesky, Reddit, Discord, Slack… <span class="badge b-verif">✔</span></li>
+          <li>Calendrier éditorial, programmation à l'avance et file d'attente de publications.</li>
+          <li>Adaptation du contenu réseau par réseau (un même message décliné par format).</li>
+          <li>Espace multi‑comptes, utile pour séparer par exemple « grand public » et « scolaires ».</li>
+        </ul>
+
+        <h4>Capacités IA</h4>
+        <p>Postiz se décrit comme un outil de programmation <strong>« agentique »</strong> intégrant de l'IA pour <strong>assister la génération et la déclinaison des contenus</strong>. <span class="badge b-verif">✔ mention du dépôt</span> <span class="badge b-prop">💡</span> Concrètement, l'équipe peut partir d'un brouillon et laisser l'outil proposer des variantes par réseau, à relire avant publication.</p>
+
+        <h4>Intégrations / API / webhooks</h4>
+        <p><span class="badge b-verif">✔ vérifié</span> Postiz expose une <strong>API publique</strong>, un <strong>SDK Node.js</strong>, un <strong>nœud n8n dédié</strong> et une intégration <strong>Make.com / Zapier</strong>. C'est ce qui permet de le piloter depuis Activepieces (voir scénarios).</p>
+
+        <div class="note prop">
+          <span class="badge b-prop">💡 Utilisation concrète à l'Exploradôme</span>
+          <p style="margin:0">Quand un <strong>nouvel atelier IA ou un événement (Fête de la science, vacances)</strong> est programmé, l'équipe prépare <strong>un seul contenu‑source</strong> (visuel + texte + date + public visé), le décline en versions Instagram / Facebook / LinkedIn, puis <strong>programme automatiquement</strong> les publications sur la semaine. Plus besoin de se reconnecter à chaque réseau : tout part du même calendrier, et l'on garde une trace de ce qui est planifié.</p>
+        </div>
+
+        <div class="cols">
+          <div class="box pro"><h5>Avantages</h5><ul>
+            <li>Très large couverture des réseaux.</li>
+            <li>Parité cloud / auto‑hébergé, sans bridage.</li>
+            <li>API + nœud n8n = automatisable facilement.</li>
+          </ul></div>
+          <div class="box con"><h5>Limites</h5><ul>
+            <li>Pile technique la plus lourde des quatre (Postgres + Redis + Temporal).</li>
+            <li>Connexion à certains réseaux = créer une « app développeur » (Meta, etc.), démarche parfois fastidieuse.</li>
+            <li>AGPL : toute version modifiée <em>et rediffusée en ligne</em> doit rester ouverte (sans incidence pour un usage interne).</li>
+          </ul></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Outil 2 : Listmonk -->
+    <article class="tool" id="listmonk">
+      <div class="tool-head">
+        <div class="row">
+          <div class="idx">2</div>
+          <div>
+            <h3>Listmonk</h3>
+            <div class="role">Newsletters &amp; gestion des listes d'e‑mails</div>
+          </div>
+          <div class="links">
+            <a href="https://listmonk.app" target="_blank" rel="noopener">Site officiel</a>
+            <a href="https://github.com/knadh/listmonk" target="_blank" rel="noopener">Dépôt GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <p><strong>En bref :</strong> Listmonk est un gestionnaire de <strong>newsletters et de listes de diffusion</strong> auto‑hébergé, réputé rapide et léger (une seule application). C'est une alternative libre à Mailchimp / Sendinblue, sans abonnement au nombre de contacts.</p>
+
+        <div class="specs">
+          <div><span class="k">Licence</span> <span class="badge b-verif">✔ AGPL‑3.0</span> — open source (OSI)</div>
+          <div><span class="k">Gratuité</span> Logiciel gratuit ; aucun coût lié au nombre d'abonnés</div>
+          <div><span class="k">Auto‑hébergement</span> Oui — binaire unique (écrit en Go) + base PostgreSQL, ou Docker</div>
+          <div><span class="k">Coûts éventuels</span> Serveur (léger, VPS ≈ 1 Go suffit) + <strong>service d'envoi SMTP</strong> pour la délivrabilité</div>
+          <div><span class="k">Facilité</span> Tableau de bord moderne ; installation simple ; envoi d'e‑mails à bien configurer</div>
+          <div><span class="k">Compétences requises</span> Notions serveur + configuration e‑mail (SPF/DKIM) pour ne pas finir en spam</div>
+        </div>
+
+        <h4>Fonctionnalités clés <span class="badge b-verif">✔ vérifié</span></h4>
+        <ul>
+          <li>Gestion de listes (simple ou double opt‑in) et d'un très grand nombre d'abonnés.</li>
+          <li><strong>Segmentation par requêtes SQL</strong> : cibler par exemple « enseignants », « familles abonnées », « partenaires ».</li>
+          <li>Gabarits d'e‑mails dynamiques (moteur de templates Go, logique &amp; variables).</li>
+          <li><strong>Statistiques</strong> intégrées : ouvertures, clics, liens les plus cliqués, rebonds.</li>
+          <li>E‑mails transactionnels déclenchés par API (confirmations, rappels…).</li>
+          <li>Gestion d'équipe avec rôles et jetons d'API.</li>
+        </ul>
+
+        <h4>Capacités IA</h4>
+        <p><span class="badge b-verif">✔ vérifié</span> Listmonk <strong>n'intègre pas d'IA en natif</strong> : c'est un moteur d'envoi et de gestion de listes. <span class="badge b-prop">💡</span> L'IA intervient donc <strong>en amont</strong> (rédaction du contenu, objet de l'e‑mail) via Activepieces ou un assistant, le texte validé étant ensuite injecté dans le gabarit Listmonk.</p>
+
+        <h4>Intégrations / API / webhooks</h4>
+        <p><span class="badge b-verif">✔ vérifié</span> API complète (création d'abonnés, déclenchement de campagnes et d'e‑mails transactionnels), jetons d'API : Listmonk se pilote parfaitement depuis un outil d'automatisation.</p>
+
+        <div class="note prop">
+          <span class="badge b-prop">💡 Utilisation concrète à l'Exploradôme</span>
+          <p style="margin:0">Constituer des <strong>listes segmentées</strong> — <em>enseignants &amp; scolaires</em>, <em>familles</em>, <em>partenaires / presse</em> — et envoyer des newsletters ciblées : programme des vacances aux familles, offres pédagogiques aux enseignants, temps forts aux partenaires. Un <strong>gabarit unique</strong> « newsletter mensuelle » est réutilisé chaque mois, et le suivi des ouvertures / clics indique quels ateliers intéressent le plus.</p>
+        </div>
+
+        <div class="cols">
+          <div class="box pro"><h5>Avantages</h5><ul>
+            <li>Très léger et économe (un binaire + une base).</li>
+            <li>Pas de coût au contact : idéal pour une base qui grandit.</li>
+            <li>Segmentation SQL très puissante ; statistiques intégrées.</li>
+          </ul></div>
+          <div class="box con"><h5>Limites</h5><ul>
+            <li>Ne fait <em>que</em> l'e‑mail (pas de réseaux ni de site).</li>
+            <li><strong>Délivrabilité</strong> à gérer : il faut un relais SMTP fiable (service dédié ou solution d'envoi) et configurer SPF/DKIM.</li>
+            <li>Pas d'IA ni d'éditeur « glisser‑déposer » aussi grand public que certains services commerciaux.</li>
+          </ul></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Outil 3 : Activepieces -->
+    <article class="tool" id="activepieces">
+      <div class="tool-head">
+        <div class="row">
+          <div class="idx">3</div>
+          <div>
+            <h3>Activepieces</h3>
+            <div class="role">Automatisation des workflows &amp; briques IA — le « chef d'orchestre »</div>
+          </div>
+          <div class="links">
+            <a href="https://www.activepieces.com" target="_blank" rel="noopener">Site officiel</a>
+            <a href="https://github.com/activepieces/activepieces" target="_blank" rel="noopener">Dépôt GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <p><strong>En bref :</strong> Activepieces est une plateforme d'<strong>automatisation visuelle</strong> (type Zapier / Make, mais libre et auto‑hébergeable). On y construit des <strong>« flux »</strong> : quand tel événement se produit, faire telle suite d'actions. C'est l'outil qui <strong>relie</strong> Postiz, Listmonk, WordPress et l'IA entre eux.</p>
+
+        <div class="specs">
+          <div><span class="k">Licence</span> <span class="badge b-verif">✔ MIT</span> (édition Communauté) — open source (OSI). Fonctions « entreprise » sous licence commerciale, non nécessaires ici.</div>
+          <div><span class="k">Gratuité</span> Gratuit ; en auto‑hébergé, <strong>tâches illimitées</strong> (pas de facturation à la tâche)</div>
+          <div><span class="k">Auto‑hébergement</span> Oui — Docker (base PostgreSQL + Redis)</div>
+          <div><span class="k">Coûts éventuels</span> Serveur VPS ; éventuel coût d'API des modèles d'IA utilisés</div>
+          <div><span class="k">Facilité</span> Éditeur visuel « sans code » ; logique de flux à prendre en main</div>
+          <div><span class="k">Compétences requises</span> Installation Docker ; construction de flux accessible à un profil non‑développeur motivé</div>
+        </div>
+
+        <h4>Fonctionnalités clés <span class="badge b-verif">✔ vérifié</span></h4>
+        <ul>
+          <li>Éditeur visuel de flux : déclencheurs (planning, webhook, e‑mail, formulaire…) → actions en chaîne.</li>
+          <li><strong>280+ « pieces »</strong> (intégrations) prêtes à l'emploi et extensibles.</li>
+          <li>Branches conditionnelles, boucles, variables, validations manuelles intégrables dans un flux.</li>
+        </ul>
+
+        <h4>Capacités IA <span class="badge b-verif">✔ vérifié</span></h4>
+        <p>Briques IA natives pour plusieurs fournisseurs de modèles (OpenAI, Claude, Gemini…), construction d'<strong>agents IA</strong>, et surtout support du <strong>MCP (Model Context Protocol)</strong> — présenté comme « la plus grande boîte à outils MCP open source », chaque intégration pouvant servir d'outil à un agent. <span class="badge b-prop">💡</span> C'est ici que l'on place les étapes « l'IA rédige un brouillon », « l'IA résume la veille », etc.</p>
+
+        <h4>Intégrations / API / webhooks</h4>
+        <p><span class="badge b-verif">✔ vérifié</span> Déclencheurs par <strong>webhook</strong> et par <strong>planification</strong>, appels HTTP/API vers n'importe quel service : Activepieces sait piloter Postiz (API), Listmonk (API) et WordPress (API REST).</p>
+
+        <div class="note prop">
+          <span class="badge b-prop">💡 Utilisation concrète à l'Exploradôme</span>
+          <p style="margin:0">Servir de <strong>colonne vertébrale</strong> : à partir d'<strong>une seule fiche « nouvel atelier »</strong> remplie par l'équipe, un flux Activepieces génère un brouillon avec l'IA, attend une <strong>validation humaine</strong>, puis publie l'actualité sur le site, programme les réseaux via Postiz et prépare la newsletter dans Listmonk. Autre flux utile : une <strong>veille hebdomadaire</strong> qui agrège des flux RSS sciences/éducation et en produit un résumé pour l'équipe.</p>
+        </div>
+
+        <div class="cols">
+          <div class="box pro"><h5>Avantages</h5><ul>
+            <li>Vraie licence MIT ; tâches illimitées en auto‑hébergé.</li>
+            <li>Relie tous les autres outils + IA au même endroit.</li>
+            <li>Éditeur visuel accessible sans être développeur.</li>
+          </ul></div>
+          <div class="box con"><h5>Limites</h5><ul>
+            <li>Certaines fonctions « entreprise » (SSO, gouvernance avancée) sont commerciales — <em>inutiles pour l'Exploradôme</em>.</li>
+            <li>L'usage d'IA via des API payantes engendre un coût à l'usage (maîtrisable).</li>
+            <li>Penser un flux fiable demande un peu de méthode au départ.</li>
+          </ul></div>
+        </div>
+        <div class="note">
+          <p style="margin:0"><small><strong>Alternative connue :</strong> <em>n8n</em> couvre les mêmes besoins et est très populaire, mais sa licence <em>fair‑code</em> n'est pas open source au sens OSI (voir §2). <em>Huginn</em> (MIT) ou <em>Node‑RED</em> (Apache‑2.0) sont d'autres options réellement libres, plus techniques.</small></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Outil 4 : WordPress -->
+    <article class="tool" id="wordpress">
+      <div class="tool-head">
+        <div class="row">
+          <div class="idx">4</div>
+          <div>
+            <h3>WordPress</h3>
+            <div class="role">Site web / CMS — actualités, agenda &amp; pages ateliers</div>
+          </div>
+          <div class="links">
+            <a href="https://wordpress.org" target="_blank" rel="noopener">Site officiel</a>
+            <a href="https://wordpress.org/about/license/" target="_blank" rel="noopener">Licence</a>
+          </div>
+        </div>
+      </div>
+      <div class="tool-body">
+        <p><strong>En bref :</strong> WordPress est le système de gestion de contenu (CMS) libre le plus répandu au monde. Il permet de gérer un <strong>site, un agenda d'événements et un fil d'actualités</strong> sans coder, avec un vaste écosystème d'extensions. <span class="badge b-obs">👁</span> <em>À vérifier lors de ma visite : l'Exploradôme utilise peut‑être déjà WordPress — auquel cas l'enjeu est surtout de mieux l'exploiter et de l'automatiser.</em></p>
+
+        <div class="specs">
+          <div><span class="k">Licence</span> <span class="badge b-verif">✔ GPLv2+</span> — open source (OSI)</div>
+          <div><span class="k">Gratuité</span> Logiciel gratuit ; extensions majoritairement gratuites (certaines « pro » payantes)</div>
+          <div><span class="k">Auto‑hébergement</span> Oui — serveur PHP + base MySQL/MariaDB (hébergement mutualisé courant)</div>
+          <div><span class="k">Coûts éventuels</span> Hébergement (≈ 3–10 €/mois en mutualisé) + nom de domaine ; maintenance / mises à jour</div>
+          <div><span class="k">Facilité</span> Prise en main grand public ; édition de pages accessible à toute l'équipe</div>
+          <div><span class="k">Compétences requises</span> Aucune pour publier ; notions d'admin pour la maintenance &amp; la sécurité</div>
+        </div>
+
+        <h4>Fonctionnalités clés</h4>
+        <ul>
+          <li>Pages &amp; articles (actualités), médiathèque, menus, gestion multi‑utilisateurs avec rôles.</li>
+          <li>Écosystème d'extensions : <strong>agenda d'événements</strong> (ex. The Events Calendar), <strong>multilingue</strong> (ex. Polylang), formulaires, SEO, etc.</li>
+          <li><strong>API REST</strong> native : permet de créer/mettre à jour des contenus depuis un outil externe (Activepieces).</li>
+        </ul>
+
+        <h4>Capacités IA</h4>
+        <p><span class="badge b-verif">✔</span> Pas d'IA en natif ; <span class="badge b-prop">💡</span> l'assistance IA passe par des extensions ou, mieux ici, par la <strong>génération de brouillons en amont</strong> (validés puis publiés via l'API REST par Activepieces).</p>
+
+        <h4>Intégrations / API / webhooks</h4>
+        <p><span class="badge b-verif">✔ vérifié</span> API REST intégrée + immense catalogue d'extensions : WordPress s'intègre à presque tout, et peut être alimenté automatiquement.</p>
+
+        <div class="note prop">
+          <span class="badge b-prop">💡 Utilisation concrète à l'Exploradôme</span>
+          <p style="margin:0">Tenir un <strong>agenda structuré</strong> (ateliers, vacances, Fête de la science) et un <strong>fil d'actualités</strong> qui font autorité : c'est la « source de vérité » du contenu. Chaque nouvel atelier devient une <strong>page/événement</strong> ; réseaux et newsletter <strong>renvoient vers cette page</strong>. Avec l'API REST, la fiche peut même être <strong>publiée automatiquement</strong> après validation.</p>
+        </div>
+
+        <div class="cols">
+          <div class="box pro"><h5>Avantages</h5><ul>
+            <li>Prise en main la plus simple pour une équipe non technique.</li>
+            <li>Écosystème gigantesque (agenda, multilingue, SEO…).</li>
+            <li>API REST = automatisable ; probablement déjà connu de l'équipe.</li>
+          </ul></div>
+          <div class="box con"><h5>Limites</h5><ul>
+            <li><strong>Maintenance / sécurité</strong> à assurer (mises à jour régulières du cœur et des extensions).</li>
+            <li>Multiplier les extensions peut alourdir le site.</li>
+            <li>Certaines extensions « pro » sont payantes (rester sur les versions libres quand c'est possible).</li>
+          </ul></div>
+        </div>
+        <div class="note">
+          <p style="margin:0"><small><strong>Alternative moderne :</strong> <em>Ghost</em> (licence MIT) gère nativement site <em>et</em> newsletters/abonnements — pertinent si l'on veut regrouper site + e‑mails, au prix d'un écosystème d'extensions plus restreint que WordPress.</small></p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <hr class="sep">
+
+  <!-- 4. Tableau comparatif -->
+  <section id="compare">
+    <h2><span class="num">4.</span> Tableau comparatif</h2>
+    <p class="lead">Ce tableau présente <strong>uniquement les différences</strong> — aucun classement, score ni « meilleur outil ». Les quatre sont complémentaires.</p>
+    <div class="table-scroll">
+      <table class="cmp">
+        <thead>
+          <tr><th>Critère</th><th>Postiz</th><th>Listmonk</th><th>Activepieces</th><th>WordPress</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Open source (OSI)</th><td><span class="yes">Oui</span></td><td><span class="yes">Oui</span></td><td><span class="yes">Oui</span></td><td><span class="yes">Oui</span></td></tr>
+          <tr><th>Licence</th><td>AGPL‑3.0</td><td>AGPL‑3.0</td><td>MIT (Communauté)</td><td>GPLv2+</td></tr>
+          <tr><th>Gratuit</th><td><span class="yes">Oui</span></td><td><span class="yes">Oui</span></td><td><span class="yes">Oui</span> (tâches illimitées)</td><td><span class="yes">Oui</span></td></tr>
+          <tr><th>Auto‑hébergement</th><td>Oui — Docker (Postgres, Redis, Temporal)</td><td>Oui — binaire Go + Postgres</td><td>Oui — Docker (Postgres, Redis)</td><td>Oui — PHP + MySQL</td></tr>
+          <tr><th>Réseaux sociaux</th><td><span class="yes">Cœur de métier</span></td><td><span class="no">Non</span></td><td><span class="part">Via API/pieces</span></td><td><span class="no">Non</span> (renvoi/partage)</td></tr>
+          <tr><th>Newsletter</th><td><span class="no">Non</span></td><td><span class="yes">Cœur de métier</span></td><td><span class="part">Orchestration</span></td><td><span class="part">Via extension</span></td></tr>
+          <tr><th>Site web</th><td><span class="no">Non</span></td><td><span class="no">Non</span></td><td><span class="no">Non</span></td><td><span class="yes">Cœur de métier</span></td></tr>
+          <tr><th>IA</th><td><span class="part">Assistance intégrée</span></td><td><span class="no">Non natif</span></td><td><span class="yes">LLM + agents + MCP</span></td><td><span class="part">Via extensions</span></td></tr>
+          <tr><th>Automatisation</th><td><span class="part">Programmation + API</span></td><td><span class="part">API + transactionnel</span></td><td><span class="yes">Cœur de métier</span></td><td><span class="part">Via API REST</span></td></tr>
+          <tr><th>Intégrations / API</th><td>API, SDK, nœud n8n, Make/Zapier</td><td>API + jetons</td><td>280+ pieces, webhooks</td><td>API REST + extensions</td></tr>
+          <tr><th>Facilité (usage)</th><td>Simple à publier</td><td>Tableau de bord clair</td><td>Sans code mais logique de flux</td><td>Grand public</td></tr>
+          <tr><th>Coûts éventuels</th><td>VPS + apps réseaux</td><td>VPS léger + envoi SMTP</td><td>VPS + API IA à l'usage</td><td>Hébergement + domaine</td></tr>
+          <tr><th>Limites principales</th><td>Pile technique lourde</td><td>E‑mail uniquement ; délivrabilité à gérer</td><td>Fonctions entreprise payantes (non requises)</td><td>Maintenance / sécurité à assurer</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><small><span class="badge b-verif">✔</span> Colonnes « Open source / Licence / Gratuit / Auto‑hébergement / IA / Intégrations » = faits vérifiés sur les dépôts et sites officiels (voir §8). Les mentions « cœur de métier / orchestration » relèvent de mon analyse d'usage.</small></p>
+  </section>
+
+  <hr class="sep">
+
+  <!-- 5. Scénarios -->
+  <section id="scenarios">
+    <h2><span class="num">5.</span> Scénarios d'automatisation</h2>
+    <p class="lead">Workflows concrets reliant les 4 outils. <strong>Une validation humaine est prévue avant toute publication.</strong> <span class="badge b-prop">💡 propositions</span></p>
+
+    <h3>Scénario A — Annonce d'un nouvel atelier (ex. atelier IA)</h3>
+    <p>Le cas le plus fréquent et le plus chronophage : faire connaître un atelier sur tous les canaux.</p>
+    <div class="flow">
+      <div class="step"><div class="dot d-hum">1</div><div class="body">
+        <div class="t">Fiche « nouvel atelier » <span class="actor a-hum">Humain</span></div>
+        <div class="d">L'équipe remplit une fiche unique : titre, date(s), public visé, objectifs pédagogiques, visuel. (Formulaire ou page dédiée.)</div>
+      </div></div>
+      <div class="step"><div class="dot d-tool">2</div><div class="body">
+        <div class="t">Déclenchement du flux <span class="actor a-tool">Activepieces</span></div>
+        <div class="d">La validation de la fiche déclenche le workflow (webhook / nouvelle entrée).</div>
+      </div></div>
+      <div class="step"><div class="dot d-ia">3</div><div class="body">
+        <div class="t">Brouillons générés par l'IA <span class="actor a-ia">IA</span></div>
+        <div class="d">Une brique IA rédige un jeu de brouillons : texte d'actualité pour le site, variantes Instagram / Facebook / LinkedIn, objet + chapô de newsletter — à partir des infos de la fiche.</div>
+        <div class="pill-tools"><span>Activepieces + modèle IA</span></div>
+      </div></div>
+      <div class="step"><div class="dot d-hum">4</div><div class="body">
+        <div class="t">Validation humaine <span class="actor a-hum">Humain — obligatoire</span></div>
+        <div class="d">Relecture : exactitude scientifique, ton, niveau de public, image. L'équipe corrige et approuve. <strong>Rien n'est publié sans cette étape.</strong></div>
+      </div></div>
+      <div class="step"><div class="dot d-tool">5</div><div class="body">
+        <div class="t">Publication de l'actualité sur le site <span class="actor a-tool">WordPress</span></div>
+        <div class="d">Le contenu validé crée la page/événement via l'API REST : c'est la « source de vérité » vers laquelle tout renvoie.</div>
+      </div></div>
+      <div class="step"><div class="dot d-tool">6</div><div class="body">
+        <div class="t">Programmation des réseaux <span class="actor a-tool">Postiz</span></div>
+        <div class="d">Les variantes validées sont programmées sur les réseaux, étalées sur la semaine, avec le lien vers la page du site.</div>
+      </div></div>
+      <div class="step"><div class="dot d-tool">7</div><div class="body">
+        <div class="t">Préparation de la newsletter <span class="actor a-tool">Listmonk</span></div>
+        <div class="d">Une campagne ciblée (familles et/ou enseignants) est préparée avec le contenu validé, prête à partir.</div>
+      </div></div>
+      <div class="step"><div class="dot d-tool">8</div><div class="body">
+        <div class="t">Collecte des statistiques <span class="actor a-tool">Activepieces</span></div>
+        <div class="d">Après quelques jours : ouvertures/clics (Listmonk) et engagement réseaux sont rassemblés dans un récapitulatif simple pour l'équipe.</div>
+      </div></div>
+    </div>
+
+    <h3>Scénario B — Veille &amp; idées de contenu (hebdomadaire)</h3>
+    <div class="flow">
+      <div class="step"><div class="dot d-tool">1</div><div class="body">
+        <div class="t">Déclencheur planifié <span class="actor a-tool">Activepieces</span></div>
+        <div class="d">Chaque lundi, le flux agrège des flux RSS (médiation scientifique, éducation, culture numérique).</div>
+      </div></div>
+      <div class="step"><div class="dot d-ia">2</div><div class="body">
+        <div class="t">Résumé &amp; idées <span class="actor a-ia">IA</span></div>
+        <div class="d">L'IA résume les articles marquants et propose 3–5 idées de posts / sujets d'atelier reliés à l'actualité.</div>
+      </div></div>
+      <div class="step"><div class="dot d-hum">3</div><div class="body">
+        <div class="t">Réception par l'équipe <span class="actor a-hum">Humain</span></div>
+        <div class="d">Le condensé arrive par e‑mail. L'équipe pioche, écarte, adapte : l'IA fait gagner du temps, l'humain décide.</div>
+      </div></div>
+    </div>
+
+    <h3>Scénario C — Rappel d'événement &amp; relance</h3>
+    <div class="flow">
+      <div class="step"><div class="dot d-tool">1</div><div class="body">
+        <div class="t">Repérage des événements proches <span class="actor a-tool">Activepieces + WordPress</span></div>
+        <div class="d">Le flux lit l'agenda et repère les événements à J‑3.</div>
+      </div></div>
+      <div class="step"><div class="dot d-hum">2</div><div class="body">
+        <div class="t">Validation rapide <span class="actor a-hum">Humain</span></div>
+        <div class="d">Message de rappel pré‑rempli, l'équipe valide en un clic.</div>
+      </div></div>
+      <div class="step"><div class="dot d-tool">3</div><div class="body">
+        <div class="t">Rappel multi‑canal <span class="actor a-tool">Postiz + Listmonk</span></div>
+        <div class="d">Post de rappel programmé et/ou e‑mail aux inscrits.</div>
+      </div></div>
+    </div>
+
+    <div class="note prop">
+      <span class="badge b-prop">💡 Principe directeur</span>
+      <p style="margin:0">Automatiser <strong>la logistique répétitive</strong> (mise en forme, programmation, diffusion, collecte de stats), jamais <strong>la décision éditoriale ni la validation</strong>. L'IA et les outils préparent ; l'équipe relit, corrige et approuve.</p>
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- 6. IA -->
+  <section id="ia">
+    <h2><span class="num">6.</span> L'IA dans la communication</h2>
+    <p class="lead">Comment l'IA peut soutenir concrètement l'équipe — <strong>toujours avec une validation humaine avant publication.</strong></p>
+
+    <div class="matrix">
+      <div>L'IA aide à…</div><div>Concrètement à l'Exploradôme</div><div>Où, dans la chaîne d'outils</div>
+
+      <div>Rédiger des contenus</div>
+      <div>Premier jet d'annonces d'ateliers, d'actualités, de posts — à partir de la fiche.</div>
+      <div>Brique IA d'Activepieces</div>
+
+      <div>Adapter par réseau</div>
+      <div>Décliner un même message en versions Instagram / Facebook / LinkedIn (ton, longueur, hashtags).</div>
+      <div>IA + Postiz</div>
+
+      <div>Préparer les newsletters</div>
+      <div>Proposer objet, chapô, structure ; reformuler pour un public famille ou enseignant.</div>
+      <div>IA → gabarit Listmonk</div>
+
+      <div>Générer des idées</div>
+      <div>Angles de communication, thèmes d'ateliers reliés à l'actualité (issus de la veille).</div>
+      <div>Scénario B</div>
+
+      <div>Créer / adapter des visuels</div>
+      <div>Pistes de visuels et déclinaisons de gabarits. <em>(Outils dédiés : génération d'images libre, ex. modèles ouverts.)</em></div>
+      <div>En amont, hors chaîne principale</div>
+
+      <div>Faire de la veille</div>
+      <div>Résumer l'actualité sciences/éducation en un condensé exploitable.</div>
+      <div>Scénario B (IA)</div>
+
+      <div>Analyser les performances</div>
+      <div>Lire les statistiques (ouvertures, clics, engagement) et en tirer des tendances simples.</div>
+      <div>IA sur données Listmonk / réseaux</div>
+
+      <div>Automatiser des tâches</div>
+      <div>Enchaîner mise en forme, diffusion et collecte, autour de la validation humaine.</div>
+      <div>Activepieces (orchestration)</div>
+    </div>
+
+    <div class="note warn">
+      <span class="badge b-prop">💡 Garde‑fous proposés</span>
+      <p><strong>Validation humaine systématique</strong> avant toute publication (exactitude scientifique, ton adapté au jeune public, respect de l'image de la structure).</p>
+      <p style="margin-bottom:0">Vigilance sur les <strong>données personnelles</strong> (RGPD) dans les listes d'abonnés, sur les <strong>droits des visuels</strong> générés, et sur le fait que l'IA <strong>propose</strong> mais ne <strong>décide</strong> pas. En auto‑hébergé, les données restent sur les serveurs de la structure — un atout pour la maîtrise et la confidentialité.</p>
+    </div>
+
+    <div class="note obs">
+      <span class="badge b-obs">👁 Lien avec mon futur rôle</span>
+      <p style="margin:0">Comme médiatrice IA, je peux à la fois <strong>animer l'atelier IA</strong> auprès des publics <em>et</em> incarner cet usage raisonné de l'IA en interne : montrer que la même technologie qu'on explique aux visiteurs peut, avec des garde‑fous, faire gagner du temps à l'équipe. C'est un fil conducteur cohérent entre médiation et communication. <em>(À relier à ce qui a été évoqué en entretien.)</em></p>
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- 7. Synthèse -->
+  <section id="synthese">
+    <h2><span class="num">7.</span> Synthèse &amp; recommandations</h2>
+    <p>Les quatre outils forment un <strong>ensemble cohérent, 100 % libre et gratuit</strong>, chacun couvrant un besoin précis, l'ensemble pouvant être relié par Activepieces :</p>
+    <ul>
+      <li><strong>Postiz</strong> → présence sur les réseaux sociaux, sans abonnement.</li>
+      <li><strong>Listmonk</strong> → newsletters ciblées vers familles, enseignants, partenaires.</li>
+      <li><strong>Activepieces</strong> → automatisation et briques IA qui relient le tout, avec validation humaine.</li>
+      <li><strong>WordPress</strong> → site / agenda / actualités, « source de vérité » du contenu.</li>
+    </ul>
+
+    <div class="note prop">
+      <span class="badge b-prop">💡 Démarche de mise en œuvre proposée (progressive)</span>
+      <p><strong>Étape 1 —</strong> Consolider le site (WordPress) : agenda structuré + actualités. <br>
+      <strong>Étape 2 —</strong> Mettre en place Postiz pour centraliser et programmer les réseaux.<br>
+      <strong>Étape 3 —</strong> Installer Listmonk et constituer les listes segmentées.<br>
+      <strong>Étape 4 —</strong> Relier le tout avec Activepieces et introduire l'IA sur un seul scénario (l'annonce d'atelier), puis étendre.</p>
+      <p style="margin-bottom:0">Commencer <strong>petit et fiable</strong> : un seul workflow bien rôdé vaut mieux que dix flux fragiles.</p>
+    </div>
+
+    <div class="note warn">
+      <span class="badge b-obs">👁 Points à confirmer avec l'équipe</span>
+      <p style="margin-bottom:0">Outils déjà en place (site, envoi d'e‑mails, réseaux actifs) ; capacité d'hébergement / de maintenance en interne ; volume et nature des listes de contacts ; contraintes RGPD ; temps disponible pour la prise en main. Ces éléments, issus de ma visite et de l'entretien, restent <strong>à valider avec mes notes</strong>.</p>
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- 8. Sources -->
+  <section id="sources">
+    <h2><span class="num">8.</span> Sources</h2>
+    <p class="lead">Vérifications effectuées en septembre 2026 sur les dépôts et sites officiels.</p>
+    <h3>Outils (dépôts &amp; sites officiels)</h3>
+    <ul class="src">
+      <li><span class="tag">Postiz</span> <a href="https://github.com/gitroomhq/postiz-app" target="_blank" rel="noopener">github.com/gitroomhq/postiz-app</a> (licence AGPL‑3.0, réseaux supportés, API / nœud n8n) — <a href="https://postiz.com" target="_blank" rel="noopener">postiz.com</a></li>
+      <li><span class="tag">Listmonk</span> <a href="https://github.com/knadh/listmonk" target="_blank" rel="noopener">github.com/knadh/listmonk</a> (licence AGPLv3, binaire Go + PostgreSQL) — <a href="https://listmonk.app" target="_blank" rel="noopener">listmonk.app</a></li>
+      <li><span class="tag">Activepieces</span> <a href="https://github.com/activepieces/activepieces" target="_blank" rel="noopener">github.com/activepieces/activepieces</a> (Communauté MIT + entreprise commerciale, 280+ pieces, IA/MCP) — <a href="https://www.activepieces.com/open-source" target="_blank" rel="noopener">activepieces.com/open-source</a></li>
+      <li><span class="tag">WordPress</span> <a href="https://wordpress.org/about/license/" target="_blank" rel="noopener">wordpress.org/about/license</a> (GPLv2+) — <a href="https://wordpress.org/about/requirements/" target="_blank" rel="noopener">exigences PHP/MySQL</a></li>
+      <li><span class="tag">n8n (écarté)</span> <a href="https://docs.n8n.io/sustainable-use-license/" target="_blank" rel="noopener">Sustainable Use License</a> &amp; <a href="https://github.com/n8n-io/n8n/blob/master/LICENSE.md" target="_blank" rel="noopener">LICENSE.md</a> — fair‑code, non OSI</li>
+      <li><span class="tag">Référence</span> <a href="https://opensource.org/licenses" target="_blank" rel="noopener">Open Source Initiative — définition &amp; licences</a></li>
+    </ul>
+    <h3>Contexte Exploradôme <span class="badge b-site">🌐 à confirmer sur exploradome.fr</span></h3>
+    <ul class="src">
+      <li><span class="tag">Officiel</span> exploradome.fr — page « Intelligence Artificielle » : <code>exploradome.fr/intelligence-artificielle</code> <em>(non consultée directement : accès réseau bloqué depuis l'environnement de rédaction)</em></li>
+      <li><span class="tag">Tourisme</span> <a href="https://www.tourisme-valdemarne.com/incontournables/exploradome/" target="_blank" rel="noopener">Val‑de‑Marne Tourisme — Exploradôme</a></li>
+      <li><span class="tag">Ville</span> <a href="https://www.vitry94.fr/equipements/exploradome-2/" target="_blank" rel="noopener">Ville de Vitry‑sur‑Seine — Exploradôme</a></li>
+      <li><span class="tag">Presse</span> Sortiraparis — « Exploradôme, le musée interactif des sciences et du numérique » &amp; « Fête de la Science 2025 »</li>
+    </ul>
+    <div class="note">
+      <p style="margin:0"><small>Toutes les mentions de licence, de fonctionnalités et d'intégrations des outils ont été contrôlées directement dans les dépôts / pages ci‑dessus. Les informations Exploradôme issues de sources secondaires sont signalées comme telles et doivent être confirmées auprès de l'équipe et sur le site officiel.</small></p>
+    </div>
+  </section>
+
+  <footer class="doc">
+    <p>Rapport professionnel Exploradôme — Volet 6 : Outils open source &amp; automatisation de la communication · Septembre 2026.<br>
+    Document de travail préparé après visite et entretien, destiné à une présentation à l'équipe. Les badges distinguent faits vérifiés, informations Exploradôme, observations personnelles et propositions.</p>
+  </footer>
+
+</div>
+</body>
+</html>
